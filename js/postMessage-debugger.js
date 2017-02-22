@@ -1,10 +1,15 @@
 var postMessageDebugger = {
-  init: function() {
-    console.log("postMessageDebugger activated");
-    addEventListener("message", function(event) {
-      console.log(document.title + " received '" + event.data + "'")
-    });
-  }
-};
+    init: function () {
+        addEventListener("message", function (event) {
 
-postMessageDebugger.init();
+            console.groupCollapsed('Window "' + document.title + "' received message: ")
+            console.log(event.data)
+            console.groupCollapsed('JSON')
+            console.log(JSON.stringify(event.data))
+            console.groupEnd();
+            console.groupEnd();
+        })
+    }
+}
+
+postMessageDebugger.init()
